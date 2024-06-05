@@ -9,66 +9,66 @@ class Movie:
     """this class represents a movie with a title, genre, director, and year it was made"""
 
     def __init__(self, title, genre, director, year): # initializes a movie object
-        self.__title = title
-        self.__genre = genre
-        self.__director = director
-        self.__year = year
+        self._title = title
+        self._genre = genre
+        self._director = director
+        self._year = year
 
     def get__title(self): #method that returns the tile of the movie
-        return self.__title
+        return self._title
 
     def get__genre(self):  # method that returns the genre of the movie
-        return self.__genre
+        return self._genre
 
     def get__director(self):  # method that returns the directr of the movie
-        return self.__director
+        return self._director
 
     def get__year(self):  # method that returns the year of the movie
-        return self.__year
+        return self._year
 
 
 class StreamingService:
     """ this class represents the streaming service with name and category of movies"""
 
     def __init__(self, name): #initializes the SS object with given name and empty catalog
-        self.__name = name
-        self.__catalog = {}
+        self._name = name
+        self._catalog = {}
 
     def get__name(self): # method to return the name of the streaming service
-        return self.__name
+        return self._name
 
     def get__catalog(self): # method to return the name of the catalog
-        return self.__catalog
+        return self._catalog
 
     def add_movie(self, movie): # method will add movie object to the catalog
-        self.__catalog[movie.get__title()] = movie
+        self._catalog[movie.get_title()] = movie
 
     def delete_movie(self, title): # this method will delete a given movie from the catalog if it already exists
-        if title in self.__catalog:
-            del self.__catalog[title]
+        if title in self._catalog:
+            del self._catalog[title]
 
 
 class StreamingGuide:
     """ This class represents a guide to manage multiple streaming services and to be able to query which grants access to
     a given movie"""
     def __init__(self): # creates an empty list to add list streaming services
-        self.__services = []
+        self._services = []
 
     def add_streaming_service(self, service): #this method will add the streaming service to list
-        self.__services.append(service)
+        self._services.append(service)
 
     def delete_streaming_service(self, name): # this method will delete the streaming service if it exists
-        self.__services = [service for service in self.__services if service.get__name() != name]
+        self._services = [service for service in self._services if service.get_name() != name]
 
     def who_streams_this_movie(self,title): # this method will determine which service shows a particular movie
         services_with_movies = [] #empty list that stores the name of the services that offer given movie
         movie_year = None
 
-        for service in self.__services:
-            catalog = service.get__catalog()
+        for service in self._services:
+            catalog = service.get_catalog()
             if title in catalog:
-                services_with_movies.append(service.get__name())
-                movie_year = catalog[title].get__year()
+                services_with_movies.append(service.get_name())
+                movie_year = catalog[title].get_year()
 
             if services_with_movies:
                 return {
